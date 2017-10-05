@@ -26,7 +26,7 @@
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>171</height>
+        <height>300</height>
        </size>
       </property>
       <property name="showGrid">
@@ -39,7 +39,7 @@
        <bool>true</bool>
       </property>
       <property name="rowCount">
-       <number>5</number>
+       <number>6</number>
       </property>
       <property name="columnCount">
        <number>2</number>
@@ -53,6 +53,7 @@
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <row/>
       <row/>
       <row/>
       <row/>

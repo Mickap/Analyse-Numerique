@@ -42,14 +42,17 @@ void Traitement::calcul()
     }
 }
 
-void Traitement::DifferencesDivisees(int n, QVector<double> x, QVector<double> f, double d[NMAX][NMAX])
+void Traitement::DifferencesDivisees(int nb_point_interpole, QVector<double> tab_x, QVector<double> tab_fdx, double tab_result[NMAX][NMAX])
 {
     int i, j;
-    for (j = 0; j <= n; j++)
-        d[j][0] = f[j];
-    for (j = 1; j <= n; j++)
-        for (i = 0; i <= n - j; i++)
-            d[i][j] = (d[i + 1][j - 1] - d[i][j - 1]) / (x[i + j] - x[i]);
+
+    // Première itération : Xn = Yn
+    for (i = 0; i <= nb_point_interpole; i++)
+        tab_result[i][0] = tab_fdx[i];
+
+    for (i = 1; i <= nb_point_interpole; i++)
+        for (j = 0; j <= nb_point_interpole - i; j++)
+            tab_result[j][i] = (tab_result[j + 1][i - 1] - tab_result[j][i - 1]) / (tab_x[j + i] - tab_x[j]);
 }
 
 double Traitement::Polynome(int n, double d[NMAX][NMAX], QVector<double> x, double alpha)
