@@ -3,18 +3,20 @@
 
 #include <QVector>
 #include <QtMath>
+#include <QDebug>
 #include <math.h>
-#define NMAX 5
+#define NMAX 50
 
 class Traitement
 {
 public:
-    Traitement();
     void calcul();
-    void DifferencesDivisees(int n, QVector<double> x, QVector<double> f, double d[NMAX][NMAX]);
-    double Polynome(int n, double d[NMAX][NMAX], QVector<double> x, double alpha);
+    void DifferencesDivisees(double mat_diff_div[NMAX][NMAX]);
+    double Polynome(double mat_diff_div[NMAX][NMAX], double alpha);
 
     QVector<double> X0, Y0, X1, Y1;
+    int nb_points;
+    double pas;
 };
 
 #endif // TRAITEMENT_H

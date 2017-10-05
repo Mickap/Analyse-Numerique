@@ -5,36 +5,44 @@ Principal::Principal(QWidget *parent) :
 {
     setupUi(this);
     connect(customPlot, SIGNAL(plottableClick(QCPAbstractPlottable*,int,QMouseEvent*)), this, SLOT(afficherPoint(QCPAbstractPlottable*,int,QMouseEvent*)));
-    connect(tabValeur, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(majPoint(QTableWidgetItem*)));
+    connect(btnCalculer, SIGNAL(clicked(bool)), this, SLOT(calculerPoints(bool)));
+    connect(btnAjout, SIGNAL(clicked(bool)), this, SLOT(ajoutPoint(bool)));
+    connect(btnSuppr, SIGNAL(clicked(bool)), this, SLOT(supprPoint(bool)));
 
-    traitement.calcul();
+    tabValeur->setHorizontalHeaderLabels(QStringList({"x", "f(x)"}));    
     makePlot();
-
-    // initialise tabValeur
-    tabValeur->setHorizontalHeaderLabels(QStringList({"x", "f(x)"}));
-    tabValeur->blockSignals(true);
-    for(int i=0; i<NMAX; i++)
-    {
-        tabValeur->setItem(i,0,new QTableWidgetItem(QString::number(traitement.X1[i])));
-        tabValeur->setItem(i,1,new QTableWidgetItem(QString::number(traitement.Y1[i])));
-    }
-    tabValeur->blockSignals(false);
 }
 
-void Principal::majPoint(QTableWidgetItem *item)
+void Principal::calculerPoints(bool)
 {
-    qDebug() << "[col=" << item->column() << " row=" << item->row() << "] Valeur : " << item->text().toDouble();
+    int n = tabValeur->rowCount();
+    traitement.nb_points = n;
+    traitement.X1.resize(n);
+    traitement.Y1.resize(n);
 
-     if(item->column() == 0)
-        traitement.X1[item->row()] = item->text().toDouble();
-    if(item->column() == 1)
-        traitement.Y1[item->row()] = item->text().toDouble();
+    // récupère les valeurs du tableau pour les placer dans X1 et Y1
+    for(int i=0; i < n; i++)
+    {
+        traitement.X1[i] = tabValeur->item(i,0)->text().toDouble();
+        traitement.Y1[i] = tabValeur->item(i,1)->text().toDouble();
+    }
 
     etiquette->setVisible(false);
     fleche->setVisible(false);
+    traitement.pas = inputPas->value();
     traitement.calcul();
     makePlot();
     customPlot->replot();
+}
+
+void Principal::ajoutPoint(bool)
+{
+    tabValeur->insertRow(tabValeur->rowCount());
+}
+
+void Principal::supprPoint(bool)
+{
+    tabValeur->removeRow(tabValeur->rowCount()-1);
 }
 
 void Principal::afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent *event)
@@ -42,7 +50,7 @@ void Principal::afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent *ev
     double x = customPlot->xAxis->pixelToCoord(event->pos().x());
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
 
-    qDebug() << courbe->name() << "x = " << x << " y = " << y;
+    qDebug().nospace() << courbe->name() << " x=" << x << " y=" << y;
 
     etiquette->setText("Coordonnées : x="+QString::number(x, 10, 2) + " y=" + QString::number(y, 10, 2));
     etiquette->setVisible(true);

@@ -16,7 +16,9 @@ public:
 private slots:
     void makePlot();
     void afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent*);
-    void majPoint(QTableWidgetItem*);
+    void calculerPoints(bool);
+    void ajoutPoint(bool);
+    void supprPoint(bool);
 private:
     QCPItemLine *fleche;
     QCPItemText *etiquette;
