@@ -13,7 +13,7 @@ Principal::Principal(QWidget *parent) :
     // initialise tabValeur
     tabValeur->setHorizontalHeaderLabels(QStringList({"x", "f(x)"}));
     tabValeur->blockSignals(true);
-    for(int i=0; i<5; i++)
+    for(int i=0; i<NMAX; i++)
     {
         tabValeur->setItem(i,0,new QTableWidgetItem(QString::number(traitement.X1[i])));
         tabValeur->setItem(i,1,new QTableWidgetItem(QString::number(traitement.Y1[i])));
