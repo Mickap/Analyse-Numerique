@@ -1,6 +1,7 @@
 # Analyse Numérique
 
 Interpolation polynomiale via la méthode de Newton.
+![Capture](https://raw.githubusercontent.com/Mickap/Analyse-Numerique/master/Capture.png)
 
 Réalisé par : SOULENQ Joévin, ENJALBERT Bastien, PERIES Mickael
 
