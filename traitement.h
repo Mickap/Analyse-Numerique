@@ -10,9 +10,8 @@
 class Traitement
 {
 public:
-    void calcul();
-    void DifferencesDivisees(double mat_diff_div[NMAX][NMAX]);
-    double Polynome(double mat_diff_div[NMAX][NMAX], double alpha);
+    void calculNewton();
+    QVector<QVector<double> > DifferencesDivisees();
 
     QVector<double> X0, Y0, X1, Y1;
     int nb_points;

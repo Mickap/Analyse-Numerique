@@ -30,7 +30,7 @@ void Principal::calculerPoints(bool)
     etiquette->setVisible(false);
     fleche->setVisible(false);
     traitement.pas = inputPas->value();
-    traitement.calcul();
+    traitement.calculNewton();
     makePlot();
     customPlot->replot();
 }
