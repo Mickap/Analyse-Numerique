@@ -11,3 +11,6 @@ http://www.polytech-lille.fr/cours-algos-calcul-scientifique/
 ## TODO
 
 Trouver un moyen de passer en paramètre mat_diff_div sans spécifier sa taille (et ainsi supprimer le #define NMAX 50).
+
+## Télécharger QtCreator
+https://www1.qt.io/download-open-source/#section-2
