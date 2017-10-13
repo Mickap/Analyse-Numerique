@@ -4,7 +4,6 @@
 #include "ui_principal.h"
 #include "qcustomplot.h"
 #include "traitement.h"
-#include <math.h>
 
 class Principal : public QMainWindow, private Ui::Principal
 {
@@ -15,10 +14,9 @@ public:
 
 private slots:
     void makePlot();
-    void afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent*);
+    void afficherPoint(QCPAbstractPlottable *, int, QMouseEvent*);
     void calculerPoints(bool);
-    void ajoutPoint(bool);
-    void supprPoint(bool);
+    void tracerCourbeInitiale(QString nomFonction);
 private:
     QCPItemLine *fleche;
     QCPItemText *etiquette;

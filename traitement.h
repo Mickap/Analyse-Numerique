@@ -4,18 +4,19 @@
 #include <QVector>
 #include <QtMath>
 #include <QDebug>
-#include <math.h>
 #define NMAX 50
 
 class Traitement
 {
 public:
-    void calculNewton();
-    QVector<QVector<double> > DifferencesDivisees();
+    void calculNewton(double pas);
+    void calculerCourbeInitiale(QString nomFonction);
+    void calculerPointsInitiaux(int nbPointsInterp, bool randomActive);
+    QVector<double> Xinterp, Yinterp, Xselec, Yselec, Xinit, Yinit;
 
-    QVector<double> X0, Y0, X1, Y1;
+private:
+    QVector<QVector<double> > DifferencesDivisees();
     int nb_points;
-    double pas;
 };
 
 #endif // TRAITEMENT_H
