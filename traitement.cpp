@@ -8,9 +8,9 @@ void Traitement::calculNewton(double pas)
 {
     QVector<QVector<double> > mat_diff_div; // tableau des différences divisés
     double min=1/pas;                       // valeur minimum
-    double max=Xselec.last()*min;           // valeur maximum : le dernier c'est pas forcément le maxxxx
+    double max=Xselec.last()*min;           // valeur maximum
     double nb_points_interp=(max-min)+1;    // nombre de points interpolés
-    nb_points = Xselec.size();
+    nb_points = Xselec.size();              // nombre de points fournis
     int n=nb_points - 1;                    // indice du dernier élément de X1
     double val_polynome;                    // contiendra chaque point du polynome
 
@@ -21,19 +21,17 @@ void Traitement::calculNewton(double pas)
     mat_diff_div = DifferencesDivisees();
 
     qDebug() << "Calcul du polynôme d'interpolation :";
-    for (int i = 0; min <= max; min++, i++)
-    {
-        // Calcul des points X0 d'interpolation
+    for (int i = 0; min <= max; min++, i++) {
+        // Calcul des points Xinterp d'interpolation
         Xinterp[i] = pas*min;
 
-        // Calcul des points Y0 d'interpolation
+        // Calcul des points Yinterp d'interpolation
         val_polynome = mat_diff_div[0][n];
         for (int j = 1; j <= n; j++)
             val_polynome = val_polynome * (Xinterp[i] - Xselec[n - j]) + mat_diff_div[0][n - j];
         Yinterp[i] = val_polynome;
-
-        qDebug().nospace() << "X0=" << Xinterp[i] << "\t Y0=" << Yinterp[i];
     }
+    qDebug() << "Xinterp :" << Xinterp << endl << "Yinterp :" << Yinterp;
 }
 
 /**
@@ -43,7 +41,7 @@ void Traitement::calculNewton(double pas)
 QVector<QVector<double> > Traitement::DifferencesDivisees()
 {
     int i, j;
-    QDebug debug = qDebug();
+    QDebug debug = qDebug().noquote().nospace();
     QVector<QVector<double>> mat_diff_div(nb_points);
     for (i = 0; i < nb_points; ++i) mat_diff_div[i].resize(nb_points);
 
@@ -57,10 +55,11 @@ QVector<QVector<double> > Traitement::DifferencesDivisees()
             mat_diff_div[j][i] = (mat_diff_div[j + 1][i - 1] - mat_diff_div[j][i - 1]) / (Xselec[j + i] - Xselec[j]);
 
 
-    for (i = 0; i <= 4; i++)
-    {
-        for (j = 0; j <= 4 - i; j++)
-            debug << QString::number(mat_diff_div[i][j], 'e', 4);
+    for (i = 0; i <= 4; i++) {
+        for (j = 0; j <= 4 - i; j++) {
+            if(mat_diff_div[i][j]>0) debug << " +" << QString::number(mat_diff_div[i][j], 'f', 4);
+            else                     debug << ' '  << QString::number(mat_diff_div[i][j], 'f', 4);
+        }
         debug << endl;
     }
 
@@ -73,24 +72,23 @@ QVector<QVector<double> > Traitement::DifferencesDivisees()
  */
 void Traitement::calculerCourbeInitiale(QString nomFonction)
 {
-    double min=0;   // valeur minimum
-    double max=10;  // valeur maximum
+    double min=0;    // valeur minimum
+    double max=10;   // valeur maximum
+    double pas=0.01; // précision
 
     Xinit.clear(); Yinit.clear(); // on efface le tableau
-    for(double i=min; i < max; i+=0.1)
-    {
+    for(double i=min; i < max; i+=pas) {
         Xinit.append(i);
-        if(nomFonction == "cos()") Yinit.append(cos(i*2));
-        if(nomFonction == "sin()") Yinit.append(sin(i*2));
-        if(nomFonction == "tan()") Yinit.append(tan(i*2));
-        if(nomFonction == "pow()") Yinit.append(pow(i, 2));
-        if(nomFonction == "sqrt()")Yinit.append(sqrt(i));
-        if(nomFonction == "log()") Yinit.append(log(i));
-        if(nomFonction == "exp()") Yinit.append(exp(i));
+        if(nomFonction == "cos()")  Yinit.append(cos(i*2));
+        if(nomFonction == "sin()")  Yinit.append(sin(i*2));
+        if(nomFonction == "1/x")    Yinit.append(1/i);
+        if(nomFonction == "pow(2)") Yinit.append(pow(i, 2));
+        if(nomFonction == "pow(3)") Yinit.append(pow(i, 3));
+        if(nomFonction == "sqrt()") Yinit.append(sqrt(i));
+        if(nomFonction == "log()")  Yinit.append(log(i));
+        if(nomFonction == "exp()")  Yinit.append(exp(i));
+        if(nomFonction == "tan()")  Yinit.append(tan(i));
     }
-
-    //for(int i=0; i<Xinit.size(); i++)
-    //    qDebug().nospace().noquote() << nomFonction << ": x=" << Xinit[i] << " y=" << Yinit[i];
 }
 
 /**
@@ -122,7 +120,7 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
 
     else {
         // version sans random
-        for (i=0; i < nbPointsInterp; i++) {
+        for (i = 0; i < nbPointsInterp; i++) {
             Xselec.append(Xinit[(i*Xinit.size()/nbPointsInterp)]);
             Yselec.append(Yinit[(i*Xinit.size()/nbPointsInterp)]);
         }

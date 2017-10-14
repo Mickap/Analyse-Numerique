@@ -25,16 +25,14 @@ void Principal::calculerPoints(bool)
     traitement.calculerCourbeInitiale(choixCourbe->currentText());
     traitement.calculerPointsInitiaux(inputNbPoints->value(), inputRandom->isChecked());
     traitement.calculNewton(inputPas->value());
-    barreEtat->showMessage(QString::number(traitement.Xselec.size()) + " points interpôlés en " + QString::number(traitement.Xinterp.size()) + " points");
+    barreEtat->showMessage(QString::number(traitement.Xselec.size()) + " points extraits de la courbe verte ont été interpolés en " + QString::number(traitement.Xinterp.size()) + " points.");
     makePlot();
 }
 
-void Principal::afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent *event)
+void Principal::afficherPoint(QCPAbstractPlottable *, int, QMouseEvent *event)
 {
     double x = graphique->xAxis->pixelToCoord(event->pos().x());
     double y = graphique->yAxis->pixelToCoord(event->pos().y());
-
-    qDebug().nospace() << courbe->name() << " x=" << x << " y=" << y;
 
     etiquette->setText("Coordonnées : x="+QString::number(x, 10, 2) + " y=" + QString::number(y, 10, 2));
     etiquette->setVisible(true);
@@ -56,7 +54,7 @@ void Principal::makePlot()
 
     // ajoute une légende
     graphique->legend->setVisible(true);
-    // customPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop); Mettre la légende à gauche
+    graphique->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignRight|Qt::AlignBottom); // Mettre la légende à bas à droite
     graphique->graph(0)->setName("Fonction initiale");
     graphique->graph(1)->setName("Points sélectionnés");
     graphique->graph(2)->setName("Fonction interpolée");
