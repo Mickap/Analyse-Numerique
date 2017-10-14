@@ -48,7 +48,7 @@ void Principal::afficherPoint(QCPAbstractPlottable *courbe, int, QMouseEvent *ev
 void Principal::makePlot()
 {
     // ajoute trois courbes
-    graphique->graph(0)->setPen(QPen(Qt::green)); // couleur bleu pour fonction initiale
+    graphique->graph(0)->setPen(QPen(Qt::green)); // couleur verte pour fonction initiale
     graphique->graph(1)->setPen(QPen(Qt::red)); // couleur rouge pour les points
     graphique->graph(1)->setLineStyle(QCPGraph::lsNone); // affiche uniquement les points
     graphique->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 8)); // les points sont en forme de cercle de rayon 8px

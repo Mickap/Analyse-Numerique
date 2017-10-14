@@ -106,7 +106,7 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
     {
         int random=0;
         for (i = 0; i < nbPointsInterp; i++) {
-            random = rand() % Xinit.size();
+            random = rand() % (Xinit.size() / nbPointsInterp) + (Xinit.size() / nbPointsInterp) * i;
             Xselec.append(Xinit[random]);
             Yselec.append(Yinit[random]);
         }
