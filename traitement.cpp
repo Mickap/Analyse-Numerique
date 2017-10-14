@@ -7,8 +7,8 @@
 void Traitement::calculNewton(double pas)
 {
     QVector<QVector<double> > mat_diff_div; // tableau des différences divisés
-    double min=1/pas;                       // valeur minimum
-    double max=Xselec.last()*min;           // valeur maximum
+    double min=0;                       // valeur minimum
+    double max=10/pas;           // valeur maximum
     double nb_points_interp=(max-min)+1;    // nombre de points interpolés
     nb_points = Xselec.size();              // nombre de points fournis
     int n=nb_points - 1;                    // indice du dernier élément de X1
@@ -100,8 +100,14 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
 {
     int i;
     Xselec.clear(); Yselec.clear(); // on efface le tableau
+
+    // On place un point au début de la courbe
+    Xselec.append(Xinit.first());
+    Yselec.append(Yinit.first());
+
     if(randomActive)
     {
+
         int random=0;
         for (i = 0; i < nbPointsInterp; i++) {
             random = rand() % (Xinit.size() / nbPointsInterp) + (Xinit.size() / nbPointsInterp) * i;
@@ -109,20 +115,15 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
             Yselec.append(Yinit[random]);
         }
 
-        // remet dans l'ordre (à cause du random)
-        QMap<double, double> sortMap;
-        for (i = 0; i < Xselec.size(); ++i)
-            sortMap.insertMulti(Xselec.at(i), Yselec.at(i));
-
-        Xselec = sortMap.keys().toVector();
-        Yselec = sortMap.values().toVector();
-    }
-
-    else {
+    } else {
         // version sans random
-        for (i = 0; i < nbPointsInterp; i++) {
+        for (i=1; i < nbPointsInterp; i++) {
             Xselec.append(Xinit[(i*Xinit.size()/nbPointsInterp)]);
             Yselec.append(Yinit[(i*Xinit.size()/nbPointsInterp)]);
         }
     }
+
+    // On place un point à la fin de la courbe
+    Xselec.append(Xinit.last());
+    Yselec.append(Yinit.last());
 }
