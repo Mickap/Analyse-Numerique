@@ -12,6 +12,7 @@ public:
     void calculNewton(double pas);
     void calculerCourbeInitiale(QString nomFonction);
     void calculerPointsInitiaux(int nbPointsInterp, bool randomActive);
+    double calculerResidus();
     QVector<double> Xinterp, Yinterp, Xselec, Yselec, Xinit, Yinit;
 
 private:

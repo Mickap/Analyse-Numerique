@@ -140,3 +140,20 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
 
     qDebug() << "Xselec :" << Xselec << endl << "Yselec :" << Yselec << endl;
 }
+
+/**
+ * @brief Traitement::calculerResidus calcule la somme des résidus au carré
+ * @return somme des résidus au carré
+ */
+double Traitement::calculerResidus()
+{
+    double residus = 0.0;
+
+    for(int i=0; i < Xinit.size(); i++)
+        for(int j=0; j < Xinterp.size(); j++)
+                if(trunc(Xinit[i]*100) == trunc(Xinterp[j]*100)) // compare avec une précision de 0.01
+                    residus += pow((Yinit[i] - Yinterp[j]), 2);
+
+    qDebug().noquote() << "SRC : " << QString::number(residus, 'g');
+    return residus;
+}

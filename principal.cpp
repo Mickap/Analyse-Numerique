@@ -25,7 +25,12 @@ void Principal::calculerPoints(bool)
     traitement.calculerCourbeInitiale(choixCourbe->currentText());
     traitement.calculerPointsInitiaux(inputNbPoints->value(), inputRandom->isChecked());
     traitement.calculNewton(inputPas->value());
-    barreEtat->showMessage(QString::number(traitement.Xselec.size()) + " points extraits de la courbe verte ont été interpolés en " + QString::number(traitement.Xinterp.size()) + " points.");
+    double SRC = traitement.calculerResidus();
+    barreEtat->showMessage(QString::number(traitement.Xselec.size())
+                + " points extraits de la courbe verte ont été interpolés en "
+                + QString::number(traitement.Xinterp.size())
+                + " points avec un SRC de "
+                + QString::number(SRC, 'g', 6) + ".");
     makePlot();
 }
 
