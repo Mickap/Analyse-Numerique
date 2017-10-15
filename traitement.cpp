@@ -108,9 +108,18 @@ void Traitement::calculerPointsInitiaux(int nbPointsInterp, bool randomActive)
     // Sélection des points à intervalle aléatoire
     if(randomActive) {
         nbPointsInterp-=2;
+        QStringList list_random;
         int random=0;
         for (i = 0; i < nbPointsInterp; i++) {
-            random = rand() % (Xinit.size() / nbPointsInterp) + (Xinit.size() / nbPointsInterp) * i;
+            do  {
+                random = rand() % (Xinit.size() / nbPointsInterp) + (Xinit.size() / nbPointsInterp) * i;
+            } while(list_random.contains(QString::number(random))
+                    || list_random.contains(QString::number(random-1))
+                    || list_random.contains(QString::number(random-2))
+                    || list_random.contains(QString::number(random+1))
+                    || list_random.contains(QString::number(random+2)));
+
+            list_random.append(QString::number(random));
             Xselec.append(Xinit[random]);
             Yselec.append(Yinit[random]);
         }
