@@ -18,6 +18,7 @@ public:
 private:
     QVector<QVector<double> > DifferencesDivisees();
     int nb_points;
+    double min, max;
 };
 
 #endif // TRAITEMENT_H

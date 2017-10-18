@@ -7,8 +7,6 @@
 void Traitement::calculNewton(double pas)
 {
     QVector<QVector<double> > mat_diff_div; // tableau des différences divisés
-    double min=0.0;             // valeur minimum
-    double max=10.0;            // valeur maximum
     double y, x=min;            // contiendra chaque points du polynome
     nb_points = Xselec.size();  // nombre de points fournis
     int n=nb_points - 1;        // indice du dernier élément de X1
@@ -72,22 +70,29 @@ QVector<QVector<double> > Traitement::DifferencesDivisees()
  */
 void Traitement::calculerCourbeInitiale(QString nomFonction)
 {
-    double min=0.0;  // valeur minimum
-    double max=10.0; // valeur maximum
+    min=0.0;         // valeur minimum
+    max=10.0;        // valeur maximum
     double pas=0.01; // précision
+
+    // réglages spécifiques pour certaines fonctions
+    if(nomFonction == "sin(x)") max = 2*M_PI;
+    if(nomFonction == "cos(x)") max = 2*M_PI;
+    if(nomFonction == "1/x")  { min = 0.01; max = 5.0; }
+    if(nomFonction == "x²")     min = -10.0;
+    if(nomFonction == "x³")     min = -10.0;
+    if(nomFonction == "log(x)") min = 0.01;
 
     Xinit.clear(); Yinit.clear(); // on efface le tableau
     for(double i=min; i <= max; i+=pas) {
         Xinit.append(i);
-        if(nomFonction == "cos()")  Yinit.append(cos(i*2));
-        if(nomFonction == "sin()")  Yinit.append(sin(i*2));
+        if(nomFonction == "sin(x)") Yinit.append(sin(i*2));
+        if(nomFonction == "cos(x)") Yinit.append(cos(i*2));
         if(nomFonction == "1/x")    Yinit.append(1/i);
-        if(nomFonction == "pow(2)") Yinit.append(pow(i, 2));
-        if(nomFonction == "pow(3)") Yinit.append(pow(i, 3));
-        if(nomFonction == "sqrt()") Yinit.append(sqrt(i));
-        if(nomFonction == "log()")  Yinit.append(log(i));
-        if(nomFonction == "exp()")  Yinit.append(exp(i));
-        if(nomFonction == "tan()")  Yinit.append(tan(i));
+        if(nomFonction == "x²")     Yinit.append(pow(i, 2));
+        if(nomFonction == "x³")     Yinit.append(pow(i, 3));
+        if(nomFonction == "√x")     Yinit.append(sqrt(i));
+        if(nomFonction == "log(x)") Yinit.append(log(i));
+        if(nomFonction == "exp(x)") Yinit.append(exp(i));
     }
 }
 

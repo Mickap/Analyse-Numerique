@@ -29,17 +29,23 @@
      <layout class="QGridLayout" name="groupe">
       <item row="4" column="0">
        <widget class="QComboBox" name="choixCourbe">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fonction initiale à tracer (courbe verte).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <item>
          <property name="text">
-          <string>cos()</string>
+          <string>sin(x)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>sin()</string>
+          <string>cos(x)</string>
          </property>
         </item>
         <item>
@@ -49,38 +55,38 @@
         </item>
         <item>
          <property name="text">
-          <string>pow(2)</string>
+          <string>x²</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>pow(3)</string>
+          <string>x³</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>sqrt()</string>
+          <string>√x</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>exp()</string>
+          <string>exp(x)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>tan()</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>log()</string>
+          <string>log(x)</string>
          </property>
         </item>
        </widget>
       </item>
       <item row="15" column="0">
        <widget class="QPushButton" name="btnCalculer">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Calculer</string>
         </property>
@@ -88,6 +94,11 @@
       </item>
       <item row="12" column="0">
        <widget class="QDoubleSpinBox" name="inputPas">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="prefix">
          <string>Pas : </string>
         </property>
@@ -110,6 +121,11 @@
       </item>
       <item row="8" column="0">
        <widget class="QCheckBox" name="inputRandom">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Aléatoire</string>
         </property>
@@ -122,6 +138,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVu Sans</family>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="suffix">
          <string> points</string>
@@ -152,6 +174,11 @@
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Extraction des points :</string>
         </property>
@@ -172,6 +199,11 @@
       </item>
       <item row="11" column="0">
        <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Précision de l'interp. :</string>
         </property>
@@ -210,6 +242,11 @@
           <width>16777215</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Fonction initiale :</string>
