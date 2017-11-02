@@ -77,6 +77,7 @@ void Traitement::calculerCourbeInitiale(QString nomFonction)
     // réglages spécifiques pour certaines fonctions
     if(nomFonction == "sin(x)") max = 2*M_PI;
     if(nomFonction == "cos(x)") max = 2*M_PI;
+    if(nomFonction == "cos(x)_runge") max = 4*M_PI;
     if(nomFonction == "1/x")  { min = 0.01; max = 5.0; }
     if(nomFonction == "x²")     min = -10.0;
     if(nomFonction == "x³")     min = -10.0;
@@ -87,6 +88,7 @@ void Traitement::calculerCourbeInitiale(QString nomFonction)
         Xinit.append(i);
         if(nomFonction == "sin(x)") Yinit.append(sin(i*2));
         if(nomFonction == "cos(x)") Yinit.append(cos(i*2));
+        if(nomFonction == "cos(x)_runge") Yinit.append(cos(i*2));
         if(nomFonction == "1/x")    Yinit.append(1/i);
         if(nomFonction == "x²")     Yinit.append(pow(i, 2));
         if(nomFonction == "x³")     Yinit.append(pow(i, 3));

@@ -50,6 +50,11 @@
         </item>
         <item>
          <property name="text">
+          <string>cos(x)_runge</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>1/x</string>
          </property>
         </item>
