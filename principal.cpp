@@ -14,6 +14,8 @@ Principal::Principal(QWidget *parent) :
 
 void Principal::tracerCourbeInitiale(QString nomFonction)
 {
+    etiquette->setVisible(false);
+    fleche->setVisible(false);
     traitement.calculerCourbeInitiale(nomFonction);
     makePlot();
 }
